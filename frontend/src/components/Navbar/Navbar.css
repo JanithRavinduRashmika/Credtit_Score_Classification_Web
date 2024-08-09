@@ -1,0 +1,27 @@
+.navbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100vw;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+    color: white;
+    z-index: 1000;
+}
+
+ul{
+    flex: 1;
+    list-style: none;
+    text-align: center;
+}
+
+ul li{
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}

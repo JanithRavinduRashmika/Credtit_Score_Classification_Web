@@ -1,0 +1,39 @@
+.infScrollcontainor{
+    width: 100%;
+    height: fit-content;
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.imgGroup{
+    display: grid;
+    place-items: center;
+    width: 400px;
+}
+
+.img{
+    object-fit: contain;
+    width: 225px;
+    height: 150px;
+    border-radius: 0.5rem;
+    aspect-ratio: 16/9;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.infScrollTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 20px;
+    margin: 50px 0 25px 0;
+    color: #0411ed;
+}
