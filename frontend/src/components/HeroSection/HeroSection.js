@@ -3,6 +3,7 @@ import './HeroSection.css';
 import heroImg from '../../assets/heroImage.png'
 import Navbar from '../Navbar/Navbar';
 import { motion } from "framer-motion"
+import GlowButton from '../GlowButton/GlowButton';
 
 const HeroSection = () => {
   return (
@@ -20,14 +21,13 @@ const HeroSection = () => {
               delay:0.2,
               x: {type: "spring", stiffness:60}, opacity: {duration: 1}, ease: "easeIn", duration: 1,
             }}
-          >Your Credit Score Decoded!
+          >Your Credit Score <span>Decoded!</span>
           </motion.h1>
-          <p>Unlock the mysteries of your credit score with our advanced prediction tools. <br/>
-          Understand key factors influencing your score and make informed financial <br/>
+          <p>Unlock the mysteries of your credit score with our advanced prediction tools.
+          Understand key factors <br/> influencing your score and make informed financial 
           decisions for a brighter future.
           </p>
-          <button>Learn More</button>
-          <button>Try it free</button>
+          <GlowButton onText = "Try It Free"/>
         </div>
       </div>
     </React.Fragment>
