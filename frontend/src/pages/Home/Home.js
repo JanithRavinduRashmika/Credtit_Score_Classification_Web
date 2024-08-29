@@ -6,6 +6,7 @@ import Testimonial from '../../components/Testimonial/Testimonial'
 import Footer from '../../components/Footer/Footer'
 import Pricing from '../../components/Pricing/Pricing'
 
+
 const Home = () => {
   return (
     <React.Fragment>

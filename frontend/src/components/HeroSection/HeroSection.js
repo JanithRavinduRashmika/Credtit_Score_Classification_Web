@@ -4,8 +4,16 @@ import heroImg from '../../assets/heroImage.png'
 import Navbar from '../Navbar/Navbar';
 import { motion } from "framer-motion"
 import GlowButton from '../GlowButton/GlowButton';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/predict');
+  }
+
   return (
     <React.Fragment>
       
@@ -27,7 +35,7 @@ const HeroSection = () => {
           Understand key factors <br/> influencing your score and make informed financial 
           decisions for a brighter future.
           </p>
-          <GlowButton onText = "Try It Free"/>
+          <GlowButton targetPath="/predict" onText = "Try It Free"/>
         </div>
       </div>
     </React.Fragment>

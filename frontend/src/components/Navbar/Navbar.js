@@ -1,8 +1,16 @@
 import './Navbar.css'
 
-const Navbar = () => {
+const Navbar = ({ backgroundColor }) => {
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
   return (
-    <div className='navbar'>
+    <div className='navbar' style={{ backgroundColor: backgroundColor }}>
         <ul>
             <li>CrediDecode</li>
         </ul>
@@ -12,7 +20,7 @@ const Navbar = () => {
             <li>About</li>
             <li>Products</li>
             <li>Insights</li>
-            <li>Contacts</li>
+            <li onClick={() => scrollToSection('contacts')}>Contacts</li>
         </ul>
 
         <ul>

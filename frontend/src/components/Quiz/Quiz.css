@@ -1,0 +1,126 @@
+.quiz-container {
+    width: 70%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.progress-bar-container {
+    width: 50%;
+    margin: auto;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #146ca4;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-weight: bold;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.option-btn, .next-btn {
+    width: 30%;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #0a2472;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.option-btn:hover, .next-btn:hover {
+    background-color: #0a2472;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: #ff0000;
+    margin-top: 10px;
+}
+
+.done h2 {
+    color: #0a2472;
+}
+
+.answer-summary {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .back-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #0a2472;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background-color: #0a2472;
+  }
+  
+  /* Adjust the next button style to align with the back button */
+  .next-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

@@ -1,13 +1,14 @@
 .pricingContainer{
     width: 100vw;
-    height: 100vh;
+    height: 125vh;
     background: linear-gradient(to bottom, #ffffff, #d2dcff);
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
     padding-left: 7.5%;
-    padding-right: 7.5%
+    padding-right: 7.5%;
+    position: relative;
     
 }
 

@@ -1,8 +1,16 @@
 import './GlowButton.css'
+import { useNavigate } from 'react-router-dom'
 
-const GlowButton = ({onText}) => {
+const GlowButton = ({onText, targetPath }) => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(targetPath);
+  }
+
   return (
-    <button className='container'> 
+    <button className='container' onClick={handleClick}> 
         <div className='button-bg'>
             <div className='toptobottom'></div>
             <div className='bottomtotop'></div>
