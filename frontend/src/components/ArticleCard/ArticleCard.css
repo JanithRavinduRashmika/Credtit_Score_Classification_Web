@@ -1,0 +1,28 @@
+.cardContainer{
+    width: 40vw;
+    height: 400px;
+    background-color: #00072d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.cardImage{
+    display: flex;
+    align-items: center;
+    width: 60%;;
+    padding-top: 20px;
+}
+
+img{
+    border-radius: 0;
+}
+
+.cardTitle{
+    padding: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}

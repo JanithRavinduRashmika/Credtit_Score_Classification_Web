@@ -2,6 +2,7 @@ import React from 'react'
 import './Prediction.css'
 import Navbar from '../../components/Navbar/Navbar'
 import Quiz from '../../components/Quiz/Quiz'
+import Footer from '../../components/Footer/Footer'
 
 const Prediction = () => {
   return (
@@ -12,6 +13,7 @@ const Prediction = () => {
             <div className='subTitle'>Predicting and Categorizing Credit Scores for Enhanced Financial Insights</div>
             <Quiz/>
         </div>
+        <Footer/>
 
         
     </div>

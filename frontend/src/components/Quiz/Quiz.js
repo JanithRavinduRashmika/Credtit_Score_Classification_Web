@@ -4,35 +4,35 @@ import './Quiz.css';
 // Assuming questions are now grouped by category
 const questionsByCategory = {
   personal: [
-    { id: 1, type: 'number', text: "What is your current age?",  min: 18, max: 100 },
-    { id: 2, type: 'currency', text: "What is your total annual income before taxes in USD?"},
-    { id: 3, type: 'currency', text: "What is your monthly in-hand salary after taxes and deductions in USD?"}
+    { id: 'Age', type: 'number', text: "What is your current age?",  min: 18, max: 100 },
+    { id: 'Annual_Income', type: 'currency', text: "What is your total annual income before taxes in USD?"},
+    { id: 'Monthly_Inhand_Salary', type: 'currency', text: "What is your monthly in-hand salary after taxes and deductions in USD?"}
   ],
   bank: [
-    { id: 4, type: 'number', text: "How many bank accounts do you currently have?" },
-    { id: 5, type: 'number', text: "How many credit cards do you own?" },
-    { id: 6, type: 'mcq', text: "How good your credits are mixed", options: ["Bad", "Standard", "Good"] },
-    { id: 7, type: 'number', text: "What is the you change in credit card limit percentage?" },
-    { id: 8, type: 'number', text: "How many times have you applied for new credit in the past year?" },
-    { id: 9, type: 'number', text: "What percentage of your available credit are you currently using?" }
+    { id: 'Num_Bank_Accounts', type: 'number', text: "How many bank accounts do you currently have?" },
+    { id: 'Num_Credit_Card', type: 'number', text: "How many credit cards do you own?" },
+    { id: 'Credit_Mix', type: 'mcq', text: "How good your credits are mixed", options: ["Bad", "Standard", "Good"] },
+    { id: 'Changed_Credit_Limit', type: 'number', text: "What is the you change in credit card limit percentage?" },
+    { id: 'Num_Credit_Inquiries', type: 'number', text: "How many times have you applied for new credit in the past year?" },
+    { id: 'Credit_Utilization_Ratio', type: 'number', text: "What percentage of your available credit are you currently using?" }
   ],
   loan: [
-    { id: 10, type: 'number', text: "How many loans do you currently have?" },
+    { id: 'Num_of_Loan', type: 'number', text: "How many loans do you currently have?" },
     //{ id: 11, type: 'text', text: "What types of loans do you have?" },
-    { id: 12, type: 'currency', text: "What is the total amount of your outstanding debt?"},
-    { id: 13, type: 'currency', text: "What is your total monthly EMI (Equated Monthly Installment) for all loans?" },
-    { id: 14, type: 'number', text: "What is the average interest rate on your loans?" }
+    { id: 'Outstanding_Debt', type: 'currency', text: "What is the total amount of your outstanding debt?"},
+    { id: 'Total_EMI_per_month', type: 'currency', text: "What is your total monthly EMI (Equated Monthly Installment) for all loans?" },
+    { id: 'Interest_Rate', type: 'number', text: "What is the average interest rate on your loans?" }
   ],
   history: [
-    { id: 15, type: 'number', text: "On average, how many days do you delay your payments beyond the due date?" },
-    { id: 16, type: 'number', text: "How many payments have you delayed in the past year?" },
-    { id: 17, type: 'number', text: "How many years have you had an active credit history?"},
-    { id: 18, type: 'mcq', text: "Do you usually pay only the minimum amount due on your credit card bills?", options: ["Yes", "No"] }
+    { id: 'Delay_from_due_date', type: 'number', text: "On average, how many days do you delay your payments beyond the due date?" },
+    { id: 'Num_of_Delayed_Payment', type: 'number', text: "How many payments have you delayed in the past year?" },
+    { id: 'Credit_History_Age', type: 'number', text: "How many months have you had an active credit history?"},
+    { id: 'Payment_of_Min_Amount', type: 'mcq', text: "Do you usually pay only the minimum amount due on your credit card bills?", options: ["Yes", "No"] }
   ], 
   spending: [
-    { id: 19, type: 'currency', text: "How much money do you invest monthly?" },
-    { id: 20, type: 'mcq', text: "How would you describe your spending behavior:", options: ["Low spent Small vallue payment","Low spent Medium vallue payment","Low spent Large vallue payment","High spent Small vallue payment","High spent Medium vallue payment","High spent Large vallue payment"]},
-    { id: 21, type: 'currency', text: "What is your average monthly balance after all expenses?" },
+    { id: 'Amount_invested_monthly', type: 'currency', text: "How much money do you invest monthly?" },
+    { id: 'Payment_Behaviour', type: 'mcq', text: "How would you describe your spending behavior:", options: ["Low spent Small vallue payment","Low spent Medium vallue payment","Low spent Large vallue payment","High spent Small vallue payment","High spent Medium vallue payment","High spent Large vallue payment"]},
+    { id: 'Monthly_Balance', type: 'currency', text: "What is your average monthly balance after all expenses?" },
   ],
 };
 
@@ -42,6 +42,11 @@ const Quiz = () => {
   const [errors, setErrors] = useState({});
   const [showDone, setShowDone] = useState(false);
   const [history, setHistory] = useState([]);
+  const [submissionMessage, setSubmissionMessage] = useState('');
+
+  const [resultColor, setResultColor] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const categories = Object.keys(questionsByCategory);
 
@@ -75,10 +80,44 @@ const Quiz = () => {
         setHistory(prev => [...prev, currentCategory]);
         setCurrentCategory(categories[currentIndex + 1]);
       } else {
-        setShowDone(true);
+        submitAnswers();
       }
     }
   };
+
+  const submitAnswers = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(answers)
+      });
+      const data = await response.json();
+      if (data.predictions) {
+        setSubmissionMessage(data.predictions);
+        setResultColor(getResultColor(data.predictions));
+        setShowDone(true);
+      }
+    } catch (error) {
+      console.error('Error submitting answers:', error);
+      setSubmissionMessage("Error submitting data");
+      setResultColor('black');
+      setShowDone(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getResultColor = (result) => {
+    if (result.toLowerCase().includes('poor')) return 'red';
+    if (result.toLowerCase().includes('standard')) return 'blue';
+    if (result.toLowerCase().includes('good')) return 'green';
+    return 'black'; // default color if no match
+  };
+
 
   const handleBack = () => {
     if (history.length > 0) {
@@ -87,6 +126,7 @@ const Quiz = () => {
       setHistory(prev => prev.slice(0, -1));
     }
   };
+
 
   const renderProgressBar = () => {
     const totalQuestions = Object.values(questionsByCategory).flat().length;
@@ -99,6 +139,15 @@ const Quiz = () => {
       </div>
     );
   };
+
+  if (isLoading) {
+    return (
+      <div className="quiz-container loading">
+        <div className="loader"></div>
+        <h2>Calculating your credit score...</h2>
+      </div>
+    );
+  }
 
   const renderQuestion = (question) => {
     switch (question.type) {
@@ -141,14 +190,9 @@ const Quiz = () => {
 
   if (showDone) {
     return (
-      <div className="quiz-container done">
-        <h2>Done!</h2>
-        <h3>Your answers:</h3>
-        {Object.values(questionsByCategory).flat().map(q => (
-          <p key={q.id} className="answer-summary">
-            Question {q.id}: {answers[q.id] || "Not answered"}
-          </p>
-        ))}
+      <div className="quiz-container done resultContainer">
+        <h4 className='resultTitle'>Your Credit Score class is estimated to be</h4>
+        <h2 className= 'resultText' style={{ color: resultColor }}>{submissionMessage}</h2>
       </div>
     );
   }
